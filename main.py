@@ -1,6 +1,35 @@
 "PROGRAM MANAJEMEN KONTAK"
 from turtledemo.penrose import start
 
+def melihat_kontak():
+    # melihat semua kontak
+    if kontak:
+        print("LIST KONTAK ANDA : ")
+        for num, item in enumerate(kontak, start=1):
+            print(f'{num}. {item["nama"]} ({item["HP"]}, {item["email"]})')
+    else:
+        print("Kontak Masih Kosong!")
+        return 1
+
+def menambah_kontak():
+    # menambahkan kontak baru
+    nama = input("Masukkan Nama Kontak yang baru: ")
+    HP = input("Masukkan Nomor HP yang baru: ")
+    email = input("Masukkan Email yang baru: ")
+    kontak_baru = {'nama': nama, 'HP': HP, 'email': email}
+    kontak.append(kontak_baru)
+    print("\nKontak Baru Berhasil ditambahkan!")
+
+def menghapus_kontak():
+    # Menghapus kontak
+    if melihat_kontak() == 1:
+        return
+    else:
+
+        i_hapus = int(input("Masukkan Nomor Kontak yang ingin dihapus: "))
+        del kontak[i_hapus - 1]
+        print("\nKontak Berhasil dihapus!")
+
 kontak1 = {'nama' : 'Andi', 'HP' : '08121212', 'email' : 'andi@gmail.com'}
 kontak2 = {'nama' : 'Anis', 'HP' : '08313131', 'email' : 'anis@gmail.com'}
 kontak = [kontak1, kontak2]
@@ -18,36 +47,13 @@ while True:
 
     #logika if
     if pilihan == '1':
-        # melihat semua kontak
-        if kontak:
-            print("LIST KONTAK ANDA : ")
-            for num, item in enumerate(kontak, start=1):
-                print(f'{num}. {item["nama"]} ({item["HP"]}, {item["email"]})')
-        else:
-            print("Kontak Masih Kosong!")
+        melihat_kontak()
 
     elif pilihan == '2':
-        # menambahkan kontak baru
-        nama = input("Masukkan Nama Kontak yang baru: ")
-        HP = input("Masukkan Nomor HP yang baru: ")
-        email = input("Masukkan Email yang baru: ")
-        kontak_baru = {'nama':nama, 'HP': HP, 'email':email}
-        kontak.append(kontak_baru)
-        print("\nKontak Baru Berhasil ditambahkan!")
+        menambah_kontak()
 
     elif pilihan == '3':
-        # Menghapus kontak
-        if kontak:
-            print("LIST KONTAK ANDA : ")
-            for num, item in enumerate(kontak, start=1):
-                print(f'{num}. {item["nama"]} ({item["HP"]}, {item["email"]})')
-        else:
-            print("Kontak Masih Kosong!")
-            continue
-
-        i_hapus = int(input("Masukkan Nomor Kontak yang ingin dihapus: "))
-        del kontak[i_hapus-1]
-        print("\nKontak Berhasil dihapus!")
+        menghapus_kontak()
 
     elif pilihan == '4':
         # Keluar dari program

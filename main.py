@@ -61,7 +61,7 @@ while True:
 
     elif pilihan == '4':
         # Keluar dari program
-        print("Terimakasih Sudah Menggunakan Program ini :)")
+        print("Terimakasih Sudah Menggunakan Program ini ya :)")
         break
     else:
         print("\nPERHATIAN! Harap Masukkan pilihan angka yang benar!")

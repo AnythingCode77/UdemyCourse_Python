@@ -1,9 +1,18 @@
 "PROGRAM MANAJEMEN KONTAK"
 from turtledemo.penrose import start
 
+def membuka_kontak(path='kontak.txt'):
+    with open(path, mode='r') as file:
+        kontak = file.readlines()
+    return kontak
+
+def menyimpan_kontak(path='kontak.txt', isi=[]):
+    with open(path, mode='w') as file:
+        file.writelines(isi)
+
 class Kontak:
     def __init__(self):
-        self.kontak = []
+        self.kontak = membuka_kontak()
 
 
     def melihat_kontak(self):
@@ -11,7 +20,7 @@ class Kontak:
         if self.kontak:
             print("LIST KONTAK ANDA : ")
             for num, item in enumerate(self.kontak, start=1):
-                print(f'{num}. {item["nama"]} ({item["HP"]}, {item["email"]})')
+                print(f'{num}. ' + item)
         else:
             print("Kontak Masih Kosong!")
             return 1
@@ -21,7 +30,7 @@ class Kontak:
         nama = input("Masukkan Nama Kontak yang baru: ")
         HP = input("Masukkan Nomor HP yang baru: ")
         email = input("Masukkan Email yang baru: ")
-        kontak_baru = {'nama': nama, 'HP': HP, 'email': email}
+        kontak_baru = f"{nama} ({HP}, {email})" + "\n"
         self.kontak.append(kontak_baru)
         print("\nKontak Baru Berhasil ditambahkan!")
 
@@ -30,10 +39,16 @@ class Kontak:
         if self.melihat_kontak() == 1:
             return
         else:
+            try:
+                i_hapus = int(input("Masukkan Nomor Kontak yang ingin dihapus: "))
+                del self.kontak[i_hapus - 1]
+                print("\nKontak Berhasil dihapus!")
+            except:
+                print("Input yang anda masukkan salah!")
 
-            i_hapus = int(input("Masukkan Nomor Kontak yang ingin dihapus: "))
-            del self.kontak[i_hapus - 1]
-            print("\nKontak Berhasil dihapus!")
+
+    def keluar_kontak(self):
+        menyimpan_kontak(isi=self.kontak)
 
 kontak_kantor = Kontak()
 kontak_keluarga = Kontak()
@@ -61,6 +76,7 @@ while True:
 
     elif pilihan == '4':
         # Keluar dari program
+        kontak_keluarga.keluar_kontak()
         print("Terimakasih Sudah Menggunakan Program ini ya Guys :)")
         break
     else:
